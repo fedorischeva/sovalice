@@ -1,24 +1,25 @@
-curl -i -H "Accept: application/json; q=1.0, */*; q=0.1" "https://k1.getcourse.ru/pl/api/users" -data "action=add&key={secret_key}&pаrams={params}"
-base64_encode(
-{
-"user":{
-"email":"fedorischeva@gmail.com", // обязательный параметр
-"phone":"89995858960",
-"first_name":"Алиса",
-"last_name":"Скотникова",
-"city":"Челябинск",
-"country":"Россия",
-"group_name":["Группа1"], // для добавления пользователя в группу
-"system":{
-"refresh_if_exists":0, // обновлять ли существующего пользователя 1/0 да/нет (этот параметр обязателен, если вы добавляете группы или дополнительные поля)
-"partner_email":"consulting-online2014@yandex.ru",
-},
-"session":{
-"utm_source":"",
-"utm_medium":"",
-"utm_content":"",
-"utm_campaign":"",
-"utm_group":"",
-"referer":"",
+#!/usr/bin/env php
+<?php
+require_once __DIR__.'/../sample/bootstrap.php';
+// Если вы не используете composer, то можно использовать include
+// require_once __DIR__.'/../lib/GetCourse/autoload.php';
+$user = new \GetCourse\User();
+// Замените на ваш аккаунт
+$user::setAccountName('k1.getcourse.ru');
+// Замените токен на сгенерированный вашим аккаунтом (http://k1.getcourse.ru/saas/account/api)
+$user::setAccessToken('b3In8tcEeLRZ0RuIJsthZp6PDknqVEiDs0ib0AveVYVvfLpNsHC02f0sh0tG6xzO93AQFcocXwKMElxchlDVU8aljQ7Hc8zKVR78GGb7S0JplVuSZisr7IVxLYRJUupq');
+try {
+	$result = $user
+		->setEmail('vasiliy.pupkin@getcourse.ru')
+		->setFirstName('Василий')
+		->setLastName('Пупкин')
+		->setUserAddField('Почтовый адрес', 'New Васюки')
+		->setGroup('шахматисты')
+		->setGroup('дилетанты')
+		->setOverwrite()
+		->setSessionReferer('http://getcourse.ru')
+		->apiCall($action = 'add');
+} catch (Exception $e) {
+	echo $e->getMessage();
 }
-});"
+print_r( $result );
