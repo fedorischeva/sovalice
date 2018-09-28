@@ -1,0 +1,24 @@
+curl -i -H "Accept: application/json; q=1.0, */*; q=0.1" "https://k1.getcourse.ru/pl/api/users" -data "action=add&key={secret_key}&pаrams={params}"
+base64_encode(
+{
+"user":{
+"email":"fedorischeva@gmail.com", // обязательный параметр
+"phone":"89995858960",
+"first_name":"Алиса",
+"last_name":"Скотникова",
+"city":"Челябинск",
+"country":"Россия",
+"group_name":["Группа1"], // для добавления пользователя в группу
+"system":{
+"refresh_if_exists":0, // обновлять ли существующего пользователя 1/0 да/нет (этот параметр обязателен, если вы добавляете группы или дополнительные поля)
+"partner_email":"consulting-online2014@yandex.ru",
+},
+"session":{
+"utm_source":"",
+"utm_medium":"",
+"utm_content":"",
+"utm_campaign":"",
+"utm_group":"",
+"referer":"",
+}
+});"
