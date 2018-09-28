@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-require_once __DIR__.'/../sample/bootstrap.php';
+require_once __DIR__.'/../lib/GetCourse/autoload.php';
 // Если вы не используете composer, то можно использовать include
 // require_once __DIR__.'/../lib/GetCourse/autoload.php';
 $user = new \GetCourse\User();
